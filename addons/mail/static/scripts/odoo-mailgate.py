@@ -27,7 +27,7 @@ def main():
     op.add_option("-u", "--userid", dest="userid", help="Odoo user id to connect with (default: %default)", default=1, type=int)
     op.add_option("-p", "--password", dest="password", help="Odoo user password (default: %default)", default='admin')
     op.add_option("--host", dest="host", help="Odoo host (default: %default)", default='localhost')
-    op.add_option("--port", dest="port", help="Odoo port (default: %default)", default=8069, type=int)
+    op.add_option("--port", dest="port", help="Odoo port (default: %default)", default=8089, type=int)
     (o, args) = op.parse_args()
 
     try:

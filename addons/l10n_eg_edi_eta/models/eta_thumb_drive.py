@@ -87,7 +87,7 @@ class EtaThumbDrive(models.Model):
     def _get_host(self):
         # It should be on the loopback address or with a fully valid https host
         # in order to be an exception to the mixed-content restrictions
-        sign_host = self.env['ir.config_parameter'].sudo().get_param('l10n_eg_eta.sign.host', 'http://localhost:8069')
+        sign_host = self.env['ir.config_parameter'].sudo().get_param('l10n_eg_eta.sign.host', 'http://localhost:8089')
         if not sign_host:
             raise ValidationError(_('Please define the host of sign tool.'))
         return sign_host

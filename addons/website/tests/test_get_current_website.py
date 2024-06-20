@@ -37,10 +37,10 @@ class TestGetCurrentWebsite(HttpCaseWithUserDemo):
         self.assertEqual(Website._get_current_website_id('my-site-1.fr'), website1.id)
 
         # CASE: domain set: get matching domain (scheme and port supported)
-        self.assertEqual(Website._get_current_website_id('my-site-1.fr:8069'), website1.id)
+        self.assertEqual(Website._get_current_website_id('my-site-1.fr:8089'), website1.id)
 
         self.assertEqual(Website._get_current_website_id('my2ndsite.com:80'), website2.id)
-        self.assertEqual(Website._get_current_website_id('my2ndsite.com:8069'), website2.id)
+        self.assertEqual(Website._get_current_website_id('my2ndsite.com:8089'), website2.id)
         self.assertEqual(Website._get_current_website_id('my2ndsite.com'), website2.id)
 
         # CASE: domain set, wrong domain: get first

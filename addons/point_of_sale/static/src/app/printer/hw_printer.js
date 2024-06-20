@@ -10,7 +10,7 @@ export class HWPrinter extends BasePrinter {
     /**
      * @param {Object} params
      * @param {Function} params.rpc the web's rpc service.
-     * @param {string} params.url full address of the iot box. E.g. `http://10.23.45.67:8069`.
+     * @param {string} params.url full address of the iot box. E.g. `http://10.23.45.67:8089`.
      */
     setup(params) {
         super.setup(...arguments);

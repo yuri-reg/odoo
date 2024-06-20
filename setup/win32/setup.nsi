@@ -573,7 +573,7 @@ Function ComponentLeave
 FunctionEnd
 
 Function LaunchLink
-    ExecShell "open" "http://localhost:8069/"
+    ExecShell "open" "http://localhost:8089/"
 FunctionEnd
 
 Function RestartOdooService

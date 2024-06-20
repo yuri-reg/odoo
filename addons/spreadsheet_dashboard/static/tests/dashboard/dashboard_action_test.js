@@ -240,7 +240,7 @@ QUnit.test("share dashboard from dashboard view", async function (assert) {
             clipboard: {
                 writeText: (url) => {
                     assert.step("share url copied");
-                    assert.strictEqual(url, "localhost:8069/share/url/132465");
+                    assert.strictEqual(url, "localhost:8089/share/url/132465");
                 },
             },
         },
@@ -252,7 +252,7 @@ QUnit.test("share dashboard from dashboard view", async function (assert) {
                 await def;
                 assert.step("dashboard_shared");
                 assert.strictEqual(args.model, "spreadsheet.dashboard.share");
-                return "localhost:8069/share/url/132465";
+                return "localhost:8089/share/url/132465";
             }
         },
     });
@@ -267,7 +267,7 @@ QUnit.test("share dashboard from dashboard view", async function (assert) {
     assert.verifySteps(["dashboard_shared", "share url copied"]);
     assert.strictEqual(
         target.querySelector(".o_field_CopyClipboardChar").innerText,
-        "localhost:8069/share/url/132465"
+        "localhost:8089/share/url/132465"
     );
     await click(target, ".fa-clipboard");
     assert.verifySteps(["share url copied"]);
@@ -299,7 +299,7 @@ QUnit.test("Changing filter values will create a new share", async function (ass
         serverData,
         mockRPC: async function (route, args) {
             if (args.method === "action_get_share_url") {
-                return `localhost:8069/share/url/${++counter}`;
+                return `localhost:8089/share/url/${++counter}`;
             }
         },
     });
@@ -307,7 +307,7 @@ QUnit.test("Changing filter values will create a new share", async function (ass
     await nextTick();
     assert.strictEqual(
         target.querySelector(".o_field_CopyClipboardChar").innerText,
-        `localhost:8069/share/url/1`
+        `localhost:8089/share/url/1`
     );
 
     await click(target, "i.fa-share-alt"); // close share dropdown
@@ -316,7 +316,7 @@ QUnit.test("Changing filter values will create a new share", async function (ass
     await nextTick();
     assert.strictEqual(
         target.querySelector(".o_field_CopyClipboardChar").innerText,
-        `localhost:8069/share/url/1`
+        `localhost:8089/share/url/1`
     );
 
     await click(target, "i.fa-share-alt");
@@ -332,6 +332,6 @@ QUnit.test("Changing filter values will create a new share", async function (ass
     await nextTick();
     assert.strictEqual(
         target.querySelector(".o_field_CopyClipboardChar")?.innerText,
-        `localhost:8069/share/url/2`
+        `localhost:8089/share/url/2`
     );
 });

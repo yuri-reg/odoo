@@ -59,7 +59,7 @@ def run_cmd(cmd, chdir=None, timeout=None):
     return subprocess.run(cmd, cwd=chdir, timeout=timeout)
 
 
-def _rpc_count_modules(addr='http://127.0.0.1', port=8069, dbname='mycompany'):
+def _rpc_count_modules(addr='http://127.0.0.1', port=8089, dbname='mycompany'):
     time.sleep(5)
     uid = xmlrpclib.ServerProxy('%s:%s/xmlrpc/2/common' % (addr, port)).authenticate(
         dbname, 'admin', 'admin', {}
@@ -304,7 +304,7 @@ class DockerTgz(Docker):
             'su odoo -s /bin/bash -c "/var/lib/odoo/odoovenv/bin/odoo -d mycompany -i base --stop-after-init"',
             'su odoo -s /bin/bash -c "/var/lib/odoo/odoovenv/bin/odoo -d mycompany --pidfile=/data/src/odoo.pid"',
         ]
-        self.run(' && '.join(cmds), self.args.build_dir, 'odoo-src-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8069, timeout=300)
+        self.run(' && '.join(cmds), self.args.build_dir, 'odoo-src-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8089, timeout=300)
         self.test_odoo()
         logging.info('Finished testing tgz package')
 
@@ -334,7 +334,7 @@ class DockerDeb(Docker):
             f'/usr/bin/apt-get install -y /data/src/odoo_{VERSION}.{TSTAMP}_all.deb',
             'su odoo -s /bin/bash -c "odoo -d mycompany -i base --pidfile=/data/src/odoo.pid"',
         ]
-        self.run(' && '.join(cmds), self.args.build_dir, 'odoo-deb-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8069, timeout=300)
+        self.run(' && '.join(cmds), self.args.build_dir, 'odoo-deb-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8089, timeout=300)
         self.test_odoo()
         logging.info('Finished testing debian package')
 
@@ -373,7 +373,7 @@ class DockerRpm(Docker):
             'su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany -i base --stop-after-init"',
             'su odoo -s /bin/bash -c "odoo -c /etc/odoo/odoo.conf -d mycompany --pidfile=/data/src/odoo.pid"',
         ]
-        self.run(' && '.join(cmds), args.build_dir, 'odoo-rpm-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8069, timeout=300)
+        self.run(' && '.join(cmds), args.build_dir, 'odoo-rpm-test-%s' % TSTAMP, user='root', detach=True, exposed_port=8089, timeout=300)
         self.test_odoo()
         logging.info('Finished testing rpm package')
 
@@ -413,7 +413,7 @@ class KVM(object):
             "-cpu", "Skylake-Client,hypervisor=on,hle=off,rtm=off",
             "-smp", "2,sockets=2,cores=1,threads=1",
             "-net", "nic,model=e1000e,macaddr=52:54:00:d3:38:5e",
-            "-net", "user,hostfwd=tcp:127.0.0.1:10022-:22,hostfwd=tcp:127.0.0.1:18069-:8069,hostfwd=tcp:127.0.0.1:15432-:5432",
+            "-net", "user,hostfwd=tcp:127.0.0.1:10022-:22,hostfwd=tcp:127.0.0.1:18089-:8089,hostfwd=tcp:127.0.0.1:15432-:5432",
             "-m", "4096",
             "-drive", f"if=virtio,file={self.image},snapshot=on",
             "-nographic",
@@ -504,7 +504,7 @@ class KVMWinTestExe(KVM):
         self.ssh('PGPASSWORD=openpgpwd /cygdrive/c/"Program Files"/"Odoo %s"/PostgreSQL/bin/createdb.exe -e -U openpg mycompany' % setupversion)
         self.ssh('netsh advfirewall set publicprofile state off')
         self.ssh('/cygdrive/c/"Program Files"/"Odoo {sv}"/python/python.exe \'c:\\Program Files\\Odoo {sv}\\server\\odoo-bin\' -d mycompany -i base --stop-after-init'.format(sv=setupversion))
-        _rpc_count_modules(port=18069)
+        _rpc_count_modules(port=18089)
         logging.info('Finished testing Windows package')
 
 

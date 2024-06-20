@@ -163,7 +163,7 @@ class TestMenu(common.TransactionCase):
             It should receives a URL with no query string and no anchor.
             """
             url = a_menu.url
-            self.request_url_mock = 'http://localhost:8069' + url
+            self.request_url_mock = 'http://localhost:8089' + url
             with MockRequest(self.env, website=website_1), \
                  patch('odoo.addons.website.models.website_menu.url_parse', new=url_parse_mock):
                 self.assertTrue(a_menu._is_active(), "Same path, no domain, no qs, should match")
@@ -171,16 +171,16 @@ class TestMenu(common.TransactionCase):
                 self.assertTrue(a_menu._is_active(), "Same path, no domain, no qs, should match (anchor should be ignored)")
                 a_menu.url = f'{url}?qs=1'
                 self.assertFalse(a_menu._is_active(), "Same path, no domain, qs mismatch, should not match")
-                self.request_url_mock = f'http://localhost:8069{url}?qs=2'
+                self.request_url_mock = f'http://localhost:8089{url}?qs=2'
                 self.assertFalse(a_menu._is_active(), "Same path, no domain, qs mismatch (not the same val), should not match")
-                self.request_url_mock = f'http://localhost:8069{url}?qs=1'
+                self.request_url_mock = f'http://localhost:8089{url}?qs=1'
                 self.assertTrue(a_menu._is_active(), "Same path, no domain, qs match, should match")
-                self.request_url_mock = f'http://localhost:8069{url}?qs=1&qs_extra=1'
+                self.request_url_mock = f'http://localhost:8089{url}?qs=1&qs_extra=1'
                 self.assertTrue(a_menu._is_active(), "Same path, no domain, qs subset match, should match")
-                a_menu.url = f'http://localhost.com:8069{url}'
-                self.request_url_mock = f'http://example.com:8069{url}'
+                a_menu.url = f'http://localhost.com:8089{url}'
+                self.request_url_mock = f'http://example.com:8089{url}'
                 self.assertFalse(a_menu._is_active(), "Same path, domain mismatch, should not match")
-                self.request_url_mock = f'http://localhost.com:8069{url}'
+                self.request_url_mock = f'http://localhost.com:8089{url}'
                 self.assertTrue(a_menu._is_active(), "Same path, same domain, should match")
 
         # First, test the full cases with a normal top menu (no child)
@@ -205,7 +205,7 @@ class TestMenu(common.TransactionCase):
         submenu2 = submenu.copy({'parent_id': menu3.id})
 
         # Second, test a nested menu configuration (simple URL, no qs/anchor)
-        self.request_url_mock = 'http://localhost:8069/'
+        self.request_url_mock = 'http://localhost:8089/'
         with MockRequest(self.env, website=website_1), \
              patch('odoo.addons.website.models.website_menu.url_parse', new=url_parse_mock):
             self.assertFalse(menu._is_active(), "Same path but it's a container menu, its URL shouldn't be considered")
@@ -221,7 +221,7 @@ class TestMenu(common.TransactionCase):
             self.assertFalse(submenu._is_active(), "Not same path (2)")
             self.assertFalse(submenu2._is_active(), "Not same path (3)")
 
-            self.request_url_mock = 'http://localhost:8069/contactus'
+            self.request_url_mock = 'http://localhost:8089/contactus'
             self.assertTrue(menu._is_active(), "A child is active (submenu)")
             self.assertFalse(menu2._is_active(), "Not same path (4)")
             self.assertTrue(menu3._is_active(), "A child is active (submenu2)")

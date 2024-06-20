@@ -32,7 +32,7 @@ QUnit.module("Fields", (hooks) => {
                     records: [
                         { id: 1, int_field: 10 },
                         { id: 2, int_field: false },
-                        { id: 3, int_field: 8069 },
+                        { id: 3, int_field: 8089 },
                         { id: 100, int_field: 2.034567e3 },
                         { id: 101, int_field: 3.75675456e6 },
                         { id: 102, int_field: 6.67543577586e12 },
@@ -271,7 +271,7 @@ QUnit.module("Fields", (hooks) => {
 
         assert.strictEqual(
             target.querySelector(".o_field_widget input").value,
-            "8069",
+            "8089",
             "Integer value must not be formatted"
         );
     });
@@ -369,7 +369,7 @@ QUnit.module("Fields", (hooks) => {
 
         assert.strictEqual(
             target.querySelector(".o_field_widget input").value,
-            "8069",
+            "8089",
             "Integer value must not be formatted"
         );
 
@@ -465,9 +465,9 @@ QUnit.module("Fields", (hooks) => {
 
         assert.strictEqual(target.querySelector(".o_field_widget input").value, "8,069");
 
-        target.querySelector(".o_field_widget input").value = 8069;
+        target.querySelector(".o_field_widget input").value = 8089;
         await triggerEvent(target, ".o_field_widget input", "input");
-        assert.strictEqual(target.querySelector(".o_field_widget input").value, "8069");
+        assert.strictEqual(target.querySelector(".o_field_widget input").value, "8089");
 
         await triggerEvent(target, ".o_field_widget input", "keydown", { key: "Enter" });
         assert.strictEqual(target.querySelector(".o_field_widget input").value, "8,069");
@@ -486,9 +486,9 @@ QUnit.module("Fields", (hooks) => {
 
         assert.strictEqual(target.querySelector(".o_field_widget input").value, "8,069");
 
-        target.querySelector(".o_field_widget input").value = 8069;
+        target.querySelector(".o_field_widget input").value = 8089;
         await triggerEvent(target, ".o_field_widget input", "input");
-        assert.strictEqual(target.querySelector(".o_field_widget input").value, "8069");
+        assert.strictEqual(target.querySelector(".o_field_widget input").value, "8089");
 
         await triggerEvent(target, ".o_field_widget input", "change"); // triggered when clicking out
         assert.strictEqual(target.querySelector(".o_field_widget input").value, "8,069");

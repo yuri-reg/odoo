@@ -122,7 +122,7 @@ export function formatTraceback(error) {
         // transforms the stack into a chromium stack by adding the error name
         // to the stack and indenting the lines, eg:
         // Error: Mock: Can't write value
-        //     _onOpenFormView@http://localhost:8069/web/content/425-baf33f1/web.assets.js:1064:30
+        //     _onOpenFormView@http://localhost:8089/web/content/425-baf33f1/web.assets.js:1064:30
         //     ...
         traceback = `${errorName}: ${error.message}\n${error.stack}`
             .replace(/\n/g, "\n    ")
